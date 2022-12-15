@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 module.exports = (req,res,next)=>{
     try {
         const token = req.headers["access_token"];
-        const check = jwt.verify(token,process.env.SECRET_KEY);
+        const check = jwt.verify(token,'qwerty');
         if(check){
             req.body.id = check.id
             next();

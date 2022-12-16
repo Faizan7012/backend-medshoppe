@@ -31,7 +31,7 @@ const getOrder = async()=>{
 
 const getSingleOrder = async(id)=>{
     try{
-        let data = await  orderModel.find({id}).populate(['userID','productID'])
+        let data = await  orderModel.find({_id:id}).populate(['userID','productID'])
 
         if(data.length == 0){
             return {
@@ -60,7 +60,7 @@ const getSingleOrder = async(id)=>{
 const deleteOrder = async(id)=>{
     try{
 
-        let deleted = await orderModel.deleteOne({id});
+        let deleted = await orderModel.deleteOne({_id:id});
 
         if(deleted.acknowledged){
             return {
@@ -88,7 +88,7 @@ const deleteOrder = async(id)=>{
 const packingSuccess = async(id)=>{
     try{
 
-        let findData = await orderModel.find({id})
+        let findData = await orderModel.find({_id:id})
         if(findData.length > 0){
 
             let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'packed': !findData[0].packed }) 
@@ -124,7 +124,7 @@ const packingSuccess = async(id)=>{
 const shippingSuccess = async(id)=>{
     try{
 
-        let findData = await orderModel.find({id})
+        let findData = await orderModel.find({_id:id})
         if(findData.length > 0){
 
             let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'shipped': !findData[0].shipped }) 
@@ -161,7 +161,7 @@ const shippingSuccess = async(id)=>{
 
 const deliverSuccess = async(id)=>{
     try{
-        let findData = await orderModel.find({id})
+        let findData = await orderModel.find({_id:id})
         if(findData.length > 0){
 
             let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'delivered': !findData[0].delivered }) 

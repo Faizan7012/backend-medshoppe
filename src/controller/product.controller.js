@@ -93,9 +93,8 @@ const getProduct = async(limit , page, category , sort , low ,high)=>{
 }
 const getOneProduct = async(id)=>{
     try{
-        let findData = await productModel.findOne({id});
-        console.log(typeof findData , findData)
-        if(findData.title == null ||findData.title == undefined ){
+        let findData = await productModel.find({_id:id});
+        if(findData.length == 0 ){
             return {
                 status:false,
                 massage:'Something went wrong please try again later !'
@@ -122,7 +121,7 @@ const getOneProduct = async(id)=>{
 
 const updateProduct = async(id,newData)=>{
     try{
-        let updatedData = await productModel.replaceOne({id},newData);
+        let updatedData = await productModel.replaceOne({_id:id},newData);
         if(updatedData.acknowledged){
         return {
                 status:true,
@@ -146,7 +145,7 @@ const updateProduct = async(id,newData)=>{
 
 const deleteProduct = async(id)=>{
     try{
-        let deletedData = await productModel.deleteOne({id});
+        let deletedData = await productModel.deleteOne({_id:id});
         if(deletedData.acknowledged){
         return {
                 status:true,
@@ -170,7 +169,7 @@ const deleteProduct = async(id)=>{
 
 const updateQuantity = async(id,val)=>{
     try{
-        let isPresent = await productModel.findOne({id});
+        let isPresent = await productModel.findOne({_id:id});
         if(isPresent.title){
         let updateQuantityData = await productModel.findByIdAndUpdate(isPresent._id,
          { quantity: val }) 

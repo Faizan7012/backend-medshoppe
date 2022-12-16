@@ -6,7 +6,7 @@ const userSchema = new Schema({
   password : {type:String,required:true},
   email: { type: String, required: true,unique:true,match:
     /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/ },
-  userType:{type:String,enum:["user","admin"],default:"user"}
+  userType:{type:String,enum:["user","admin"]}
 });
 
 const userModel = model("user", userSchema);

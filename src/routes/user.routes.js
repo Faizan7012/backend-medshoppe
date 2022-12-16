@@ -55,6 +55,8 @@ UserRoute.get("/signup/:id", async (req, res) => {
 // Post Request
 
 UserRoute.post("/signup", async (req, res) => {
+
+  const hash = await argon2.hash(req.body.password);
   const email_users = await userModel.find({
     email: req.body.email,
   });

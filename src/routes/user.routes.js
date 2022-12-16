@@ -65,7 +65,7 @@ UserRoute.post("/signup", async (req, res) => {
   } else {
     const token = req.headers["access_token"];
     if (token) {
-      const access_verification = jwt.verify(token, process.env.SECRET_KEY);
+      const access_verification = jwt.verify(token, 'qwerty');
       if (access_verification.userType === "admin") {
         try {
           const hash = await argon2.hash(req.body.password);
@@ -147,7 +147,7 @@ UserRoute.post("/signin", async (req, res) => {
             username: user[0].username,
             userType: user[0].userType,
           },
-          process.env.SECRET_KEY,
+          'qwerty',
           {
             expiresIn: "1d",
           }
@@ -158,7 +158,7 @@ UserRoute.post("/signin", async (req, res) => {
             username: user[0].username,
             userType: user[0].userType,
           },
-          process.env.REFRESH_SECRET_KEY,
+          'qwertyuiop',
           {
             expiresIn: "7d",
           }
@@ -195,13 +195,13 @@ UserRoute.post("/signin/verification", async (req, res) => {
   try {
     const refresh_verification = jwt.verify(
       refreshToken,
-      process.env.REFRESH_SECRET_KEY
+      'qwertyuiop'
     );
 
     try {
       const access_verification = jwt.verify(
         accessToken,
-        process.env.SECRET_KEY
+        'qwerty'
       );
       if (!access_verification) {
         const newToken = jwt.sign(
@@ -210,7 +210,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
             username: refresh_verification.username,
             userType: refresh_verification.userType,
           },
-          process.env.SECRET_KEY,
+          'qwerty',
           {
             expiresIn: "1d",
           }
@@ -230,7 +230,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
           username: refresh_verification.username,
           userType: refresh_verification.userType,
         },
-        process.env.SECRET_KEY,
+        'qwerty',
         {
           expiresIn: "1d",
         }

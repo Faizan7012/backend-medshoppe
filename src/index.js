@@ -5,9 +5,7 @@ const ProductRoute = require("./routes/product.routes");
 const CartRoute = require("./routes/cart.routes");
 const OrderRoute = require("./routes/order.routes");
 const { connect } = require("./config/db.config");
-require('dotenv').config();
 const app = expres();
-const port = process.env.PORT
 app.use(cors())
 app.use(expres.json())
 app.use('/user',UserRoute)
@@ -23,7 +21,7 @@ app.get('/',async(req,res)=>{
 
 
 
-app.listen(port,async()=>{
+app.listen(8080,async()=>{
     await connect();
-    console.log(`listening on http://localhost:${port}`)
+    console.log(`listening on http://localhost:8080`)
 })

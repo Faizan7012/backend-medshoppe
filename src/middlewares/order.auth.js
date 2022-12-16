@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const orderTokenCheck = (req,res,next)=>{
     try {
         const token = req.headers["access_token"];
-        const check = jwt.verify(token,'qwerty');
+        const check = jwt.verify(token,process.env.SECRET_KEY);
         if(check){
             if(check.role == 'admin'){
                 req.body.userID = check.id

@@ -2,8 +2,8 @@ const express = require("express");
 const OrderRoute = express.Router();
 const cors = require("cors");
 const { getOrder, deleteOrder, shippingSuccess, packingSuccess, deliverSuccess, createOrder, getSingleOrder, getOrderDataForUser } = require("../controller/order.controller");
-const { orderTokenCheck } = require("../../middlewares/order.auth");
-const checkToken = require("../../middlewares/user.middleware");
+const { orderTokenCheck } = require("../middlewares/order.auth");
+const checkToken = require("../middlewares/user.middleware");
 OrderRoute.use(cors());
 
 

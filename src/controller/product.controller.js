@@ -264,5 +264,22 @@ const getSearchProduct = async(q,limit,page,low,high,sort)=>{
     }
 }
 
+const getDataAdmin = async(limit , page)=>{
+    try{
+        let Data = await productModel.find().limit(limit).skip((page - 1)*limit).sort({quantity:1})
+        return {
+                status:true,
+                massage:'Product data fetched sucessfully',
+                data:Data
+             }      
+        }
+      catch(e){
+        return {
+            status:false,
+            massage:e.message
+        }
+      }
+}
 
-module.exports = {getProduct,updateProduct,deleteProduct,updateQuantity,createProduct , getOneProduct ,getSearchProduct};
+
+module.exports = {getProduct,updateProduct,deleteProduct,updateQuantity,createProduct , getOneProduct ,getSearchProduct , getDataAdmin};

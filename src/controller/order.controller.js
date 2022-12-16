@@ -1,4 +1,4 @@
-const transporter = require("../../config/mail");
+const transporter = require("../config/mail");
 const cartModel = require("../model/cart.model");
 const orderModel = require("../model/order.model");
 const productModel = require("../model/product.model");

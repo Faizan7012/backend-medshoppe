@@ -1,8 +1,8 @@
 const express = require("express");
 const ProductRoute = express.Router();
 const cors = require("cors");
-const {getProduct,updateProduct,deleteProduct,updateQuantity,createProduct,getOneProduct, getSearchProduct} = require('../controller/product.controller');
-const { orderTokenCheck } = require("../../middlewares/order.auth");
+const {getProduct,updateProduct,deleteProduct,updateQuantity,createProduct,getOneProduct, getSearchProduct, getDataAdmin} = require('../controller/product.controller');
+const { orderTokenCheck } = require("../middlewares/order.auth");
 ProductRoute.use(cors());
 
 ProductRoute.get('/',async(req,res)=>{
@@ -13,6 +13,11 @@ ProductRoute.get('/',async(req,res)=>{
 ProductRoute.get('/:id',async(req,res)=>{
     const id = req.params.id
     let ans = await getOneProduct(id)
+    res.send(ans)
+})
+ProductRoute.get('/admin/prod',async(req,res)=>{
+    const {limit,page} = req.query
+    let ans = await getDataAdmin(limit,page)
     res.send(ans)
 })
 

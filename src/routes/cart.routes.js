@@ -2,7 +2,7 @@ const express = require("express");
 const CartRoute = express.Router();
 const cors = require("cors");
 const cartModel = require("../model/cart.model");
-const checkToken = require("../../middlewares/user.middleware");
+const checkToken = require("../middlewares/user.middleware");
 CartRoute.use(cors());
 CartRoute.use(checkToken);
 

@@ -215,13 +215,13 @@ const createOrder = async(userID,totalBill,details,paymentType)=>{
                 }
             }
             else{
-                findData.forEach((ele)=>{
+                findData.forEach(async(ele)=>{
                     totalBill += ele.quantity * ele.productID.mrp
-                    productModel.findByIdAndUpdate(
+                       await  productModel.findByIdAndUpdate(
                            ele.productID._id,
                         { quantity: ele.productID.quantity - ele.quantity }
                       )
-                   }) 
+                   })
                 await cartModel.deleteMany({userID:userID})
                 transporter.sendMail({
                     to:findData[0].userID.email,

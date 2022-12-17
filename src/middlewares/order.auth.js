@@ -5,7 +5,7 @@ const orderTokenCheck = (req,res,next)=>{
         const token = req.headers["access_token"];
         const check = jwt.verify(token,'qwerty');
         if(check){
-            if(check.role == 'admin'){
+            if(check.userType == 'admin'){
                 req.body.userID = check.id
                 next();
             }

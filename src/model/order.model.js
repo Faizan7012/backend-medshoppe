@@ -15,7 +15,7 @@ const orderSchema = new Schema({
                      }
                    }
                  ],
-    
+   quantity:{type:Number}  ,
    packed : {type :Boolean , default : false} ,
    shipped: {type :Boolean , default : false} ,
    delivered : {type :Boolean , default : false} ,

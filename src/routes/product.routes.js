@@ -3,6 +3,7 @@ const ProductRoute = express.Router();
 const cors = require("cors");
 const {getProduct,updateProduct,deleteProduct,updateQuantity,createProduct,getOneProduct, getSearchProduct, getDataAdmin} = require('../controller/product.controller');
 const { orderTokenCheck } = require("../middlewares/order.auth");
+const productModel = require("../model/product.model");
 ProductRoute.use(cors());
 
 ProductRoute.get('/',async(req,res)=>{
@@ -54,6 +55,5 @@ ProductRoute.get('/search/prod',async(req,res)=>{
     let ans = await getSearchProduct(q,limit,page,low,high,sort);
     res.send(ans)
 })
-
 
 module.exports = ProductRoute

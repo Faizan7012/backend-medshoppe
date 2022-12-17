@@ -146,6 +146,7 @@ UserRoute.post("/signin", async (req, res) => {
         const access_token = jwt.sign(
           {
             id: user[0]._id,
+            email:user[0].email,
             username: user[0].username,
             userType: user[0].userType,
           },
@@ -157,6 +158,7 @@ UserRoute.post("/signin", async (req, res) => {
         const refresh_token = jwt.sign(
           {
             _id: user[0]._id,
+            email:user[0].email,
             username: user[0].username,
             userType: user[0].userType,
           },
@@ -209,6 +211,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
         const newToken = jwt.sign(
           {
             id: refresh_verification._id,
+            email:refresh_verification.email,
             username: refresh_verification.username,
             userType: refresh_verification.userType,
           },
@@ -229,6 +232,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
       const newToken = jwt.sign(
         {
           id: refresh_verification._id,
+          email:refresh_verification.email,
           username: refresh_verification.username,
           userType: refresh_verification.userType,
         },

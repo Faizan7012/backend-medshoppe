@@ -119,9 +119,20 @@ const getOneProduct = async(id)=>{
 
 
 
-const updateProduct = async(id,newData)=>{
+const updateProduct = async(newData)=>{
     try{
-        let updatedData = await productModel.replaceOne({_id:id},newData);
+        let updatedData = await productModel.findByIdAndUpdate(newData._id,{
+            title : newData.title,
+            mrp:newData.mrp,
+            quantity : newData.quantity,
+            ancestor : newData.ancestor,
+            brand : newData.brand,
+            strike : newData.strike,
+            instock : newData.instock,
+            img1 : newData.img1,
+            img2 : newData.img2,
+            img3 : newData.img3
+        });
         if(updatedData.acknowledged){
         return {
                 status:true,

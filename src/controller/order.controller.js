@@ -261,7 +261,7 @@ const createOrder = async(userID,totalBill,details,paymentType)=>{
 
 const getOrderDataForUser = async(userID)=>{
     try{
-        let data = await  orderModel.find({userID}).populate('productID')
+        let data = await  orderModel.find({userID}).populate('orderData.productID')
         if(!data){
             return {
                 status:false,

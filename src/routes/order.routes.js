@@ -24,7 +24,7 @@ OrderRoute.patch('/shipped/:id',async(req,res)=>{
 })
 
 
-OrderRoute.get('/user/get',checkToken, async(req,res)=>{
+OrderRoute.get('/user/get',checkToken ,async(req,res)=>{
     const {id} = req.body
     let ans = await getOrderDataForUser(id);
     res.send(ans)

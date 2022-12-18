@@ -121,7 +121,7 @@ const getOneProduct = async(id)=>{
 
 const updateProduct = async(newData)=>{
     try{
-        let updatedData = await productModel.findByIdAndUpdate(newData._id,{
+        let updatedData = await productModel.findByIdAndUpdate(newData.id,{
             title : newData.title,
             mrp:newData.mrp,
             quantity : newData.quantity,

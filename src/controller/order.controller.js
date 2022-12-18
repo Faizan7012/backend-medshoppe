@@ -198,7 +198,7 @@ const deliverSuccess = async(id)=>{
 
 const createOrder = async(userID,totalBill,details,paymentType)=>{
     try{
-    let findData = await cartModel.find({userID:userID},{_id : 0 , __v : 0}).populate(['userID','orderData.productID'])
+    let findData = await cartModel.find({userID:userID},{_id : 0 , __v : 0}).populate(['userID','productID'])
     let dataQ = await cartModel.aggregate([{$group:{_id: '$userID' , total : {$sum : '$quantity'}}}]);
         if(findData.length > 0){
               let orderDatalist = await orderModel.create({

@@ -24,6 +24,13 @@ OrderRoute.patch('/shipped/:id',async(req,res)=>{
 })
 
 
+OrderRoute.get('/user/get',checkToken, async(req,res)=>{
+    const {id} = req.body
+    let ans = await getOrderDataForUser(id);
+    res.send(ans)
+})
+
+
 OrderRoute.patch('/packed/:id',orderTokenCheck,async(req,res)=>{
     let ans = await packingSuccess(req.params.id);
     res.send(ans)
@@ -44,11 +51,7 @@ OrderRoute.post('/create',checkToken,async(req,res)=>{
     res.send(ans)
 })
 
-OrderRoute.get('/user',checkToken, async(req,res)=>{
-    const {id} = req.body
-    let ans = await getOrderDataForUser(id);
-    res.send(ans)
-})
+
 
 
 module.exports = OrderRoute

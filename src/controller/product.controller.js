@@ -169,10 +169,10 @@ const deleteProduct = async(id)=>{
 
 const updateQuantity = async(id,val)=>{
     try{
-        let isPresent = await productModel.findOne({_id:id});
-        if(isPresent.title){
-        let updateQuantityData = await productModel.findByIdAndUpdate(isPresent._id,
-         { quantity: val }) 
+        let isPresent = await productModel.find({_id:id});
+        if(isPresent.length >0){
+        let updateQuantityData = await productModel.findByIdAndUpdate(isPresent[0]._id,
+         { quantity: isPresent[0].quantity + val }) 
         if(updateQuantityData.acknowledged){
         return {
                 status:true,

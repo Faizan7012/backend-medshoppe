@@ -123,7 +123,7 @@ const updateProduct = async(id,newData)=>{
     try{
         let isPresent = await productModel.find({_id:id});
         if(isPresent.length > 0){
-            let updatedData = await productModel.findByIdAndUpdate(isPresent[0]._id,{
+            let updatedData = await productModel.findByIdAndUpdate(isPresent[0].id,{
                 title : newData.title,
                 mrp:newData.mrp,
                 quantity : newData.quantity,
@@ -135,7 +135,7 @@ const updateProduct = async(id,newData)=>{
                 img2 : newData.img2,
                 img3 : newData.img3
             } , {new : true});
-            if(updatedData.acknowledged){
+            if(updatedData){
             return {
                     status:true,
                     massage:'Product updated sucessfully',

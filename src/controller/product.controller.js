@@ -134,7 +134,7 @@ const updateProduct = async(id,newData)=>{
                 img1 : newData.img1,
                 img2 : newData.img2,
                 img3 : newData.img3
-            } , {new : true});
+            });
             if(updatedData){
             return {
                     status:true,

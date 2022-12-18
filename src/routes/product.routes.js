@@ -30,7 +30,7 @@ ProductRoute.post('/', orderTokenCheck,async(req,res)=>{
 })
 
 ProductRoute.patch('/:id',orderTokenCheck , async(req,res)=>{
-    let {newProduct} = req.body;
+    let newProduct = req.body;
     const {id} = req.params;
     let ans = await updateProduct(id,newProduct);
     res.send(ans);

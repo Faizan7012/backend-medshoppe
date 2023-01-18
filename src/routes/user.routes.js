@@ -61,9 +61,10 @@ UserRoute.post("/signup", async (req, res) => {
     email: req.body.email,
   });
   if (email_users.length >= 1) {
-    res.status(404).json({
-      message: "EmailID already exists",
-    });
+    res.send({
+      status:false , 
+      message : 'Email Already Exists!'
+    })
   } else {
     const token = req.headers["access_token"];
     if (token) {
@@ -80,9 +81,10 @@ UserRoute.post("/signup", async (req, res) => {
           });
           const created_users = await new_user.save();
 
-          res.status(201).json({
-            newUser: created_users,
-          });
+          res.send({
+            status:true, 
+            message : 'Account created successfully'
+          })
         } catch (error) {
           res.status(404).json({
             error: error,
@@ -103,13 +105,15 @@ UserRoute.post("/signup", async (req, res) => {
         });
         const created_users = await new_user.save();
 
-        res.status(201).json({
-          newUser: created_users,
-        });
+        res.send({
+          status:true , 
+          message : 'Account created successfully'
+        })
       } catch (error) {
-        res.status(404).json({
-          error: error,
-        });
+        res.send({
+          status:false , 
+          message : error.message
+        })
       }
     }
   }
@@ -167,26 +171,32 @@ UserRoute.post("/signin", async (req, res) => {
             expiresIn: "7d",
           }
         );
-        res.status(200).json({
+        res.send({
+          status:true , 
+          message : 'Login Successfull',
           AccessToken: access_token,
           RefreshToken: refresh_token,
           username: user[0].username,
           userType: user[0].userType,
-        });
+        })
       } else {
-        res.status(403).json({
-          message: "YOUR PASSWORD IS INCORRECT",
-        });
+        res.send({
+          status:false , 
+          message : 'YOUR PASSWORD IS INCORRECT'
+        })
       }
     } else {
-      res.status(404).json({
-        message: "NO USER NOT FOUND",
-      });
+      res.send({
+        status:false , 
+        message : 'NO USER NOT FOUND'
+      })
+    
     }
   } catch (error) {
-    res.status(404).json({
-      error: "EMAIL OR PASSWORD IS INCORRECT",
-    });
+    res.send({
+      status:false , 
+      message : error.message
+    })
   }
 });
 
